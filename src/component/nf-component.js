@@ -3,12 +3,12 @@
  */
 
 // En la pagina que se utiliza el componente mete el estilo en el header
-require('insert-css')(require('./style.css'));
+require('insert-css')(require('./nf-component.css'));
 
 Vue.component('nf-component', {
     name: 'nf-component',
     props: ['title', 'list', 'onClick', 'filter'],
-    template: require('./tmpl-nf-component.html'),
+    template: require('./nf-component.html'),
 
     // Metodos internos del componente
     methods: {

@@ -23,17 +23,21 @@ module.exports = function (css, options) {
 };
 
 },{}],2:[function(require,module,exports){
+module.exports = '.hide {\n    display: none;\n}\n\nul {\n    margin: 0;\n    padding: 0;\n}\n\nli > div.done, .demo li > div.done {\n    color: #7f8c8d;\n    text-decoration: line-through;\n}\n\nli > div {\n    display: inline-flex;\n    width: 90%;\n    cursor: pointer;\n    padding-left: 10px;\n}\n\n.filter {\n    background-color: #e0e0e0;\n    height: 20px;\n    padding: 10px;\n}\n\n.list {\n    border: 1px solid #acacac;\n    margin: 5px;\n}\n\n.expand-transition {\n    transition: all .3s ease;\n    height: 20px;\n    padding: 10px;\n    background-color: #eee;\n    overflow: hidden;\n    border-top: 1px solid rgb(217, 217, 217);\n}\n\n.expand-enter, .expand-leave {\n    height: 0;\n    padding: 0 10px;\n    opacity: 0;\n}';
+},{}],3:[function(require,module,exports){
+module.exports = '<div class="list">\n    <div class="filter" nf-show="filter">\n        <label for="search">Filtrar:</label>\n        <input id="search" nf-model="search" type="text"/>\n    </div>\n    <div>\n        <ul>\n            <li nf-if="empty"\n                nf-transition="expand">\n                <div nf-text="emptyMessage"></div>\n            </li>\n\n            <li nf-repeat="list | filterBy search"\n                nf-transition="expand">\n                <button nf-on="click: remove">X</button>\n                <div nf-text="content"\n                     nf-class="done: done"\n                     nf-on="\n                    click: done = !done,\n                    click: click\n                 "></div>\n            </li>\n        </ul>\n    </div>\n</div>\n';
+},{}],4:[function(require,module,exports){
 /**
  * Created by german.peraferrer on 7/18/2015.
  */
 
 // En la pagina que se utiliza el componente mete el estilo en el header
-require('insert-css')(require('./style.css'));
+require('insert-css')(require('./nf-component.css'));
 
 Vue.component('nf-component', {
     name: 'nf-component',
     props: ['title', 'list', 'onClick', 'filter'],
-    template: require('./tmpl-nf-component.html'),
+    template: require('./nf-component.html'),
 
     // Metodos internos del componente
     methods: {
@@ -82,8 +86,4 @@ Vue.component('nf-component', {
         this.isEmpty();
     }
 });
-},{"./style.css":3,"./tmpl-nf-component.html":4,"insert-css":1}],3:[function(require,module,exports){
-module.exports = '.hide {\n    display: none;\n}\n\nul {\n    margin: 0;\n    padding: 0;\n}\n\nli > div.done, .demo li > div.done {\n    color: #7f8c8d;\n    text-decoration: line-through;\n}\n\nli > div {\n    display: inline-flex;\n    width: 90%;\n    cursor: pointer;\n    padding-left: 10px;\n}\n\n.filter {\n    background-color: #e0e0e0;\n    height: 20px;\n    padding: 10px;\n}\n\n.list {\n    border: 1px solid #acacac;\n    margin: 5px;\n}\n\n.expand-transition {\n    transition: all .3s ease;\n    height: 20px;\n    padding: 10px;\n    background-color: #eee;\n    overflow: hidden;\n    border-top: 1px solid rgb(217, 217, 217);\n}\n\n.expand-enter, .expand-leave {\n    height: 0;\n    padding: 0 10px;\n    opacity: 0;\n}';
-},{}],4:[function(require,module,exports){
-module.exports = '<div class="list">\n    <div class="filter" nf-show="filter">\n        <label for="search">Filtrar:</label>\n        <input id="search" nf-model="search" type="text"/>\n    </div>\n    <div>\n        <ul>\n            <li nf-if="empty"\n                nf-transition="expand">\n                <div nf-text="emptyMessage"></div>\n            </li>\n\n            <li nf-repeat="list | filterBy search"\n                nf-transition="expand">\n                <button nf-on="click: remove">X</button>\n                <div nf-text="content"\n                     nf-class="done: done"\n                     nf-on="\n                    click: done = !done,\n                    click: click\n                 "></div>\n            </li>\n        </ul>\n    </div>\n</div>\n';
-},{}]},{},[2]);
+},{"./nf-component.css":2,"./nf-component.html":3,"insert-css":1}]},{},[4]);
