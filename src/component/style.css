@@ -1,0 +1,46 @@
+.hide {
+    display: none;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+li > div.done, .demo li > div.done {
+    color: #7f8c8d;
+    text-decoration: line-through;
+}
+
+li > div {
+    display: inline-flex;
+    width: 90%;
+    cursor: pointer;
+    padding-left: 10px;
+}
+
+.filter {
+    background-color: #e0e0e0;
+    height: 20px;
+    padding: 10px;
+}
+
+.list {
+    border: 1px solid #acacac;
+    margin: 5px;
+}
+
+.expand-transition {
+    transition: all .3s ease;
+    height: 20px;
+    padding: 10px;
+    background-color: #eee;
+    overflow: hidden;
+    border-top: 1px solid rgb(217, 217, 217);
+}
+
+.expand-enter, .expand-leave {
+    height: 0;
+    padding: 0 10px;
+    opacity: 0;
+}

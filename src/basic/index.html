@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Vue Example 1</title>
+</head>
+
+<style>
+    li.done, .demo li.done {
+        color: #7f8c8d;
+        text-decoration: line-through;
+    }
+
+    .expand-transition {
+        transition: all .3s ease;
+        height: 30px;
+        padding: 10px;
+        background-color: #eee;
+        overflow: hidden;
+    }
+
+    .expand-enter, .expand-leave {
+        height: 0;
+        padding: 0 10px;
+        opacity: 0;
+    }
+
+</style>
+
+<body>
+
+<div id="demo">
+    <h1>{{@ title | capitalize}}</h1>
+    <div>
+        <input nf-model="numero" number/>
+        <label nf-text="numero"></label>
+    </div>
+    <ul>
+        <li nf-repeat="todos"
+            nf-class="done: done"
+            nf-transition="expand">
+            <button nf-on="click: remove">X</button>
+            <span nf-text="content"
+                  nf-on="click: done = !done"></span>
+        </li>
+    </ul>
+</div>
+
+</body>
+</html>
+
+<script src="../../node_modules/jquery/dist/jquery.min.js"></script>
+<script src="../../node_modules/vue/dist/vue.min.js"></script>
+
+<script>
+
+    Vue.config.prefix = 'nf-';
+
+    var demo;
+    var data = {
+        title: 'todos',
+        numero: 12345.6,
+        todos: [{
+                done: true,
+                content: 'Learn JavaScript'
+            }, {
+                done: false,
+                content: 'Learn Vue.js'
+            }
+        ]
+    };
+
+    $(document).ready(function() {
+
+        var ViewModel = {
+            el: '#demo',
+
+            data: data,
+
+            methods: {
+                add: function(obj) {
+                    this.todos.push(obj)
+                },
+
+                del: function(id) {
+                    return this.todos.splice(this.todos.indexOf(id), 1);
+                },
+
+                remove: function(e) {
+                    this.del(e.targetVM.$index);
+                }
+            },
+
+            watch: {
+                'todos': {
+                    // Handler que se dispara ante un cambio de datos
+                    handler: function(val, oldVal) {
+                        console.log(oldVal);
+                        console.log(val);
+                    },
+
+                    // Determina si esccuhas en profundidad, es decir, el cambio de una property de un objet de la collection
+                    deep: true
+
+                }
+            },
+
+            created: function() {
+                console.log('created');
+            },
+
+            beforeCompile: function() {
+                console.log('beforeCompile');
+            },
+
+            compiled: function() {
+                console.log('compiled');
+            },
+
+            ready: function() {
+                console.log('ready');
+            },
+
+            attached: function() {
+                console.log('attached');
+            },
+
+            detached: function() {
+                console.log('detached');
+            },
+
+            beforeDestroy: function() {
+                console.log('beforeDestroy');
+            },
+
+            destroyed: function() {
+                console.log('destroyed');
+            }
+
+        };
+
+        demo = new Vue(ViewModel);
+
+    });
+
+</script>

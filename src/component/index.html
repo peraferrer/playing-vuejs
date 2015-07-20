@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Vue Example 1</title>
+</head>
+
+<body id="view">
+
+    <h2 nf-text="title"></h2>
+
+    <nf-component
+        list="{{todos}}"
+        filter="true"
+        on-click="{{click}}">
+    </nf-component>
+
+    <nf-component
+        list="{{todos1}}"
+        filter="true">
+    </nf-component>
+
+</body>
+</html>
+
+<script src="../../node_modules/jquery/dist/jquery.min.js"></script>
+<script src="../../node_modules/vue/dist/vue.js"></script>
+<script src="../../build/build.js"></script>
+
+<script>
+
+    Vue.config.prefix = 'nf-';
+
+    var vm;
+
+    var myModel = {
+        title: 'Listas en componente Vue.js',
+        todos: [{
+                done: true,
+                content: 'Learn JavaScript'
+            }, {
+                done: false,
+                content: 'Learn Vue.js'
+            }
+        ],
+
+        todos1: [{
+                id: 0,
+                done: true,
+                content: 'German'
+            }, {
+                id: 1,
+                done: false,
+                content: 'Guada'
+            }, {
+                id: 2,
+                done: false,
+                content: 'Sofia'
+            }
+        ]
+
+    };
+
+    $(document).ready(function() {
+
+        // Encapsulamos por seguridad el Modelo
+        vm = (function() {
+            // Creamos un modelo Vue
+            var _vm = new Vue({
+                el: '#view',
+                data: myModel,
+                methods: {
+                    click: function(obj) {
+                        obj.content = obj.content + ' >';
+                        console.log(obj);
+                    }
+                }
+            });
+
+            // Exponemos solo lo que necesitamos
+            return _vm
+        })();
+
+    });
+
+</script>

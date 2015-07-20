@@ -1,0 +1,25 @@
+<div class="list">
+    <div class="filter" nf-show="filter">
+        <label for="search">Filtrar:</label>
+        <input id="search" nf-model="search" type="text"/>
+    </div>
+    <div>
+        <ul>
+            <li nf-if="empty"
+                nf-transition="expand">
+                <div nf-text="emptyMessage"></div>
+            </li>
+
+            <li nf-repeat="list | filterBy search"
+                nf-transition="expand">
+                <button nf-on="click: remove">X</button>
+                <div nf-text="content"
+                     nf-class="done: done"
+                     nf-on="
+                    click: done = !done,
+                    click: click
+                 "></div>
+            </li>
+        </ul>
+    </div>
+</div>
